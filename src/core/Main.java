@@ -14,43 +14,45 @@ import util.SessionFactoryProvider;
  *
  * @author ashif
  */
-public class Main implements SessionFactoryProvider{
-    
-    public static Session session ;
-    public static Transaction transaction ; 
-    
+public class Main implements SessionFactoryProvider {
+
+    public static Session session;
+    public static Transaction transaction;
+    public static User user;
+
     public static void main(String[] args) {
-        
-        User user1 = new User();
-        user1.setUserName("Ashif");
-        user1.setPassword("Ashif123");
-        
-        User user2 = new User();
-        user2.setUserName("Arif");
-        user2.setPassword("Arif123");
-        
+
         session = SESSION_FACTORY.openSession();
         try {
-            
+
             transaction = session.beginTransaction();
+
+            user = (User) session.get(User.class, 2L);
+            user.setUserName("Changed Username");
+            user.setPassword("Changed Pass");
             
-            session.save(user1);
-            session.save(user2);
-            
+            session.update(user);
+
             transaction.commit();
-            
-            
+
         } catch (Exception e) {
-            
+
             transaction.rollback();
             throw new ExceptionInInitializerError(e);
-        
-        } finally{
-            
+
+        } finally {
+
             session.close();
         }
-        
+
         SESSION_FACTORY.close();
+
+        if (user != null) {
+
+            System.out.println("User Id : " + user.getUserId());
+            System.out.println("User Name : " + user.getUserName());
+            System.out.println("User Pass : " + user.getPassword());
+        }
     }
-    
+
 }
