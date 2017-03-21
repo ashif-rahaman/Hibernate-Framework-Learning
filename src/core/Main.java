@@ -27,9 +27,10 @@ public class Main implements SessionFactoryProvider {
 
             transaction = session.beginTransaction();
 
-            user = (User) session.get(User.class, 2L);
-            user.setUserName("Changed Username");
-            user.setPassword("Changed Pass");
+            user = new User();
+            user.setUserId(6L);
+            user.setUserName("Updated_Username_6");
+            user.setPassword("Updated_Password_6");
             
             session.update(user);
 
@@ -38,7 +39,7 @@ public class Main implements SessionFactoryProvider {
         } catch (Exception e) {
 
             transaction.rollback();
-            throw new ExceptionInInitializerError(e);
+            System.out.println(e.toString());
 
         } finally {
 
