@@ -11,7 +11,7 @@
     
     <property name="hibernate.connection.pool_size">1</property>
     <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.hbm2ddl.auto">create</property>
+    <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
     
     <mapping class="database.models.User"/>
     
