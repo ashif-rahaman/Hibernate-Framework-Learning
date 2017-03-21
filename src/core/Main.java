@@ -28,11 +28,9 @@ public class Main implements SessionFactoryProvider {
             transaction = session.beginTransaction();
 
             user = new User();
-            user.setUserId(6L);
-            user.setUserName("Updated_Username_6");
-            user.setPassword("Updated_Password_6");
+            user.setUserId(2L);
             
-            session.update(user);
+            session.delete(user);
 
             transaction.commit();
 
